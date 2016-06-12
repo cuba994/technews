@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}	
+	<body>
+	<div class= "single-post">
+		{% block post_single %}
+			<div >
+				<p>Data publikacji: {{ post_single.add_date }}</p>
+				<h1>{{ post_single.title }}</h1>
+				<p><h3>{{ post_single.content|linebreaks }}</h3></p>
+			</div>
+			<hr>
+
+                    <h3>Komentarze</h3><!-- Komentarze -->
+                    {% for c in post_single.coment_set.all %}
+                    <div class="comment">
+                        <p><span><em>{{ c.name }}</em></span></p>
+                        <p><em>Opublikowano: {{ c.add_date }}</em></p>
+                        <p>{{ c.content }}</p>
+						<hr>
+                    </div>
+                    {%  endfor %}
+					<h3><a href="/articles/{{ post_single.id }}/add_coment">Dodaj komentarz</a></h4>
+		{% endblock %}
+	</div>
+	</body>
+{% endblock content %}
